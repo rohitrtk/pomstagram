@@ -1,0 +1,15 @@
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "strict": false,
+    "outDir": "./dist",
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "sourceMap": true,
+    "allowJs": false,
+    "baseUrl": ".",
+    "removeComments": true,
+    "esModuleInterop": true,
+  }
+}
