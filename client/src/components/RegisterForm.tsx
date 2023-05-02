@@ -43,6 +43,7 @@ const RegisterForm = () => {
     formData.append("emailAddress", emailAddress);
     formData.append("password", password);
     formData.append("picturePath", picture!.name);
+    formData.append("picture", picture!);
 
     const res = await fetch("http://localhost:3001/auth/register", {
       method: "POST",

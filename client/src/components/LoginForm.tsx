@@ -48,9 +48,6 @@ const LoginForm = () => {
           token: loggedIn.token
         })
       );
-
-      console.log("Logged In!");
-      //router.push("/");
     }
   };
 
@@ -65,14 +62,16 @@ const LoginForm = () => {
           {...register("emailAddress")}
           placeholder="Email Address"
           type="email"
+          className="w-2/3"
         />
         <input
           {...register("password")}
           placeholder="Password"
           type="password"
+          className="w-2/3"
         />
         <button
-          className="border rounded-md border-gray-300 p-2 hover:bg-gray-200 focus:bg-gray-200"
+          className="border rounded-md border-gray-300 p-2 hover:bg-gray-200 focus:bg-gray-200 w-1/2"
           type="submit">
           Log In
         </button>

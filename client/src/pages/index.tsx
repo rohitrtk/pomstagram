@@ -11,7 +11,13 @@ const Home = () => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <Navbar />
-      {!user ? <LoginForm /> : <>home</>}
+      {!user ? (
+        <div className="w-[37.5%]">
+          <LoginForm />
+        </div>
+      ) : (
+        <>home</>
+      )}
     </div>
   );
 };

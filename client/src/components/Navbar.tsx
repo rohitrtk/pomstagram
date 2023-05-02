@@ -14,7 +14,7 @@ const Navbar = () => {
   const user = useSelector((state: any) => state.user);
 
   return (
-    <div className="fixed top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white">
+    <div className="fixed top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center">
       <div
         className="flex flex-row justify-center items-center gap-2 hover:cursor-pointer"
         onClick={() => router.push("/")}>
@@ -30,12 +30,12 @@ const Navbar = () => {
         />
       </div>
       {user ? (
-        <div>
-          
+        <div className="flex flex-row justify-center items-center gap-5">
+          <div className="bg-black rounded-full h-[35px] w-[35px]"></div>
           <button
             className="hover:bg-gray-300 rounded-lg p-1"
             onClick={() => dispatch(setLogout())}>
-            <LogoutIcon className="" />
+            <LogoutIcon className="" sx={{ fontSize: 35 }} />
           </button>
         </div>
       ) : (
