@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/UI/Navbar";
 
 const Profile = () => {
   const [user, setUser] = useState();

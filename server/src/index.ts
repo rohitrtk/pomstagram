@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createPost } from "./controllers/posts.js";
@@ -29,7 +30,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb" }));
 app.use(cors());
-app.use("/public", express.static(path.join(__dirname, "public/assets")));
+app.use("/public", express.static(path.join(__dirname, "../public/assets")));
 
 const storage: StorageEngine = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -47,6 +48,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 const PORT: number = parseInt(process.env.PORT) || 3001;
 

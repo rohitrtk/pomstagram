@@ -54,8 +54,10 @@ export const likePost = async (req: Request, res: Response) => {
     const liked = post.likes.get(userId);
 
     if (liked) {
-      post.likes.delete(userId);
+      console.log("1");
+      post.likes.delete(userId as string);
     } else {
+      console.log(req.body);
       post.likes.set(userId, true);
     }
 
@@ -65,7 +67,7 @@ export const likePost = async (req: Request, res: Response) => {
       { new: true }
     );
 
-    res.status(200).json();
+    res.status(200).json(updatedPost);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

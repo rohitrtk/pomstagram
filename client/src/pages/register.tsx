@@ -1,21 +1,13 @@
-import Image from "next/image";
-import RegisterForm from "@/components/RegisterForm";
-
-import CoverPhoto from "./../assets/coverPhoto.jpeg";
-import Navbar from "@/components/Navbar";
+import RegisterForm from "@/components/Form/RegisterForm";
+import CoverGallery from "@/components/UI/CoverGallery";
 
 const Register = () => {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
-      <Navbar />
-      <div className="w-3/4 grid grid-cols-2">
-        <Image
-          className="w-full h-full shadow-md rounded-lg"
-          src={CoverPhoto}
-          alt=""
-          width="1920"
-          height="1080"
-        />
+    <div className="w-full h-full flex flex-row justify-center items-center">
+      <div className="w-3/4 flex flex-col md:grid md:grid-cols-2 gap-5">
+        <div className="relative collapse md:visible shadow-lg border border-gray-300 rounded-sm">
+          <CoverGallery />
+        </div>
         <RegisterForm />
       </div>
     </div>

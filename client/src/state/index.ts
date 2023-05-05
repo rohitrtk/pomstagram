@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IUser {
-  userId: string;
+  _id: string;
   userName: string;
   emailAddress: string;
   picturePath?: string;
@@ -9,17 +9,17 @@ export interface IUser {
 }
 
 export interface IPost {
-  userId: string;
+  _id: string;
   description: string;
   picturePath: string;
   userPicturePath: string;
-  likes: number;
+  likes: Record<string, boolean>;
 }
 
 export interface IState {
   user: IUser | null;
   token: string | null;
-  posts: any[];
+  posts: IPost[];
 }
 
 const initialState: IState = {
@@ -44,8 +44,8 @@ export const authSlice = createSlice({
       state.posts = action.payload.posts;
     },
     setPost: (state, action) => {
-      const updatedPosts = state.posts.map((post: any) => {
-        if (post._id === action.payload._id) return action.payload.post;
+      const updatedPosts = state.posts.map((post: IPost) => {
+        if (post._id === action.payload.post._id) return action.payload.post
         return post;
       });
 

@@ -2,8 +2,12 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import Pomstagram from "@/components/Pomstagram";
+import FormTextInput from "./FormTextInput";
 
 const registerSchema = yup.object().shape({
   userName: yup.string().required("required"),
@@ -17,6 +21,7 @@ interface FormValues {
   emailAddress: string;
   password: string;
   picture: File | null;
+  terms: boolean;
 }
 
 const RegisterForm = () => {
@@ -65,29 +70,37 @@ const RegisterForm = () => {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="m-auto flex flex-col justify-center items-center gap-5 [&>input]:border [&>input]:rounded-md [&>input]:border-gray-300 [&>input]:p-2 border border-gray-300 rounded-lg shadow-lg p-5">
-        <div className="w-full flex flex-col justify-center items-center gap-2">
-          <h1 className="text-4xl font-bold">Pomstagram</h1>
+    <form onSubmit={handleSubmit(onSubmit)} className="h-full">
+      <div className="m-auto flex flex-col justify-center items-center gap-5 border border-gray-300 rounded-sm shadow-lg p-5 h-full">
+        <div className="w-full flex flex-col justify-center items-center text-center gap-2">
+          <Pomstagram />
           <p>Sign up to see cute pictures of Pomeranians!</p>
         </div>
-        <input
-          className="w-2/3"
-          {...register("userName")}
+
+        <FormTextInput
+          name="userName"
           placeholder="Username"
+          type="text"
+          register={register}
+          errors={errors}
         />
-        <input
-          className="w-2/3"
-          {...register("emailAddress")}
+
+        <FormTextInput
+          name="emailAddress"
           placeholder="Email Address"
           type="email"
+          register={register}
+          errors={errors}
         />
-        <input
-          className="w-2/3"
-          {...register("password")}
+
+        <FormTextInput
+          name="password"
           placeholder="Password"
           type="password"
+          register={register}
+          errors={errors}
         />
+
         <div
           {...getRootProps({ className: "dropzone" })}
           className="flex flex-col h-auto w-2/3 p-2 border-gray-300 border rounded-md text-gray-500 text-center justify-center items-center">
@@ -98,10 +111,26 @@ const RegisterForm = () => {
             <p>{getValues().picture!.name}</p>
           )}
         </div>
-        <div className="flex flex-row gap-2">
-          <input type="checkbox" />
-          <label>Accept terms and conditions</label>
+
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-row gap-2">
+            <input
+              type="checkbox"
+              {...register("terms", {
+                required: "Please accept terms & conditions"
+              })}
+            />
+            <label htmlFor="terms">Accept terms and conditions</label>
+          </div>
+          <ErrorMessage
+            errors={errors}
+            name="terms"
+            render={({ message }) => (
+              <p className="text-red-500 text-xs">{message}</p>
+            )}
+          />
         </div>
+
         <button
           className="border rounded-md border-gray-300 p-2 hover:bg-gray-200 focus:bg-gray-200 w-1/2"
           type="submit">

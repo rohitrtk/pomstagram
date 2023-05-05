@@ -16,6 +16,12 @@ import {
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { ThemeProvider } from "@material-tailwind/react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+
+config.autoAddCss = false;
+
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { IState } from "./../state";
@@ -46,9 +52,11 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <div className="w-screen h-screen">
-          <Component {...pageProps} />;
-        </div>
+        <ThemeProvider>
+          <div className="w-screen h-screen">
+            <Component {...pageProps} />
+          </div>
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   );
