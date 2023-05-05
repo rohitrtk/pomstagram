@@ -5,6 +5,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  userName: String,
   description: String,
   picturePath: String,
   userPicturePath: String,

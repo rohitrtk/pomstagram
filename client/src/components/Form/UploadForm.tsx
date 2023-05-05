@@ -52,6 +52,7 @@ const UploadForm = () => {
     formData.append("picturePath", picture!.name);
     formData.append("description", description);
     formData.append("userId", user!._id);
+    formData.append("userName", user!.userName);
 
     const res = await fetch("http://localhost:3001/posts", {
       method: "POST",

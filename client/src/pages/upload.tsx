@@ -16,15 +16,17 @@ const Upload = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center text-center">
+    <div className="w-full h-full flex flex-col justify-start items-center text-center">
       <Navbar />
-      <Card color="transparent" shadow={true} className="p-5 gap-5">
-        <Typography className="text-4xl" color="blue-gray">
-          Upload a photo!
-        </Typography>
+      <div className="p-5">
+        <Card color="transparent" shadow={true} className="p-5 gap-5">
+          <Typography className="text-4xl" color="blue-gray">
+            Upload a photo!
+          </Typography>
 
-        <UploadForm />
-      </Card>
+          <UploadForm />
+        </Card>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
@@ -14,14 +13,16 @@ import {
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 import { IPost, IState, IUser, setPost } from "@/state";
+import UserIcon from "./UserIcon";
 
-interface Props {
-  post: IPost;
-}
-
-const PostCard = ({ picturePath, description, likes, _id }: IPost) => {
-  //const { picturePath, description, likes, _id } = post;
-
+const PostCard = ({
+  picturePath,
+  description,
+  likes,
+  _id,
+  userPicturePath,
+  userName
+}: IPost) => {
   const dispatch = useDispatch();
 
   const token = useSelector<IState, string | null>((state) => state.token);
@@ -56,8 +57,15 @@ const PostCard = ({ picturePath, description, likes, _id }: IPost) => {
         className="m-0 rounded-none">
         <img src={`http://localhost:3001/public/${picturePath}`} />
       </CardHeader>
-      <CardBody className="p-1 justify-between flex flex-row items-center">
-        <Typography>{description}</Typography>
+      <CardBody className="p-1 justify-between flex flex-row items-center mx-1">
+        <div className="flex flex-row gap-1">
+          <UserIcon
+            size="xs"
+            userName={userName}
+            userPicturePath={`http://localhost:3001/public/${userPicturePath}`}
+          />
+          <Typography>{description}</Typography>
+        </div>
         {user ? (
           <FontAwesomeIcon
             icon={isLiked ? faHeartSolid : faHeartRegular}

@@ -12,6 +12,7 @@ import { Avatar, IconButton, Input } from "@material-tailwind/react";
 import { setLogout } from "@/state";
 import Pomstagram from "@/components/Pomstagram";
 import PawPrint from "./../../assets/pawprint.png";
+import UserIcon from "./UserIcon";
 
 const Navbar = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Navbar = () => {
   const user = useSelector((state: any) => state.user);
 
   return (
-    <div className="sticky top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center">
+    <div className="sticky top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center h-[70px]">
       <div
         className="flex flex-row justify-center items-center gap-2 hover:cursor-pointer"
         onClick={() => router.push("/")}>
@@ -43,9 +44,9 @@ const Navbar = () => {
             />
           </div>
           <div className="flex flex-row justify-center items-center gap-2">
-            <Avatar
-              variant="circular"
-              src={`http://localhost:3001/public/${user.picturePath}`}
+            <UserIcon
+              userName={user.userName}
+              userPicturePath={`http://localhost:3001/public/${user.picturePath}`}
               size="sm"
             />
             <IconButton

@@ -13,6 +13,7 @@ export interface IPost {
   description: string;
   picturePath: string;
   userPicturePath: string;
+  userName: string;
   likes: Record<string, boolean>;
 }
 
