@@ -1,43 +1,31 @@
-import { MouseEventHandler } from "react";
-import ImageGallery from "react-image-gallery";
+import { Carousel } from "@material-tailwind/react";
 
-const images: { original: string }[] = [
-  {
-    original: "http://localhost:3001/public/cover1.jpeg"
-  },
-  {
-    original: "http://localhost:3001/public/cover2.jpeg"
-  },
-  {
-    original: "http://localhost:3001/public/cover3.jpeg"
-  }
+const images: string[] = [
+  "http://localhost:3001/public/cover1.jpeg",
+  "http://localhost:3001/public/cover2.jpeg",
+  "http://localhost:3001/public/cover3.jpeg"
 ];
 
-const startIndex: number = Math.floor(Math.random() * images.length);
-
 const CoverGallery = () => {
-  const renderFunction = (
-    onClick: MouseEventHandler<HTMLElement>,
-    isPlaying: boolean
-  ) => <></>;
+  const dummy = () => <></>;
 
   return (
-    <div className="">
-      <ImageGallery
-        additionalClass="custom-gallery"
-        startIndex={startIndex}
-        items={images}
-        infinite={true}
-        autoPlay={true}
-        disableKeyDown={true}
-        disableSwipe={true}
-        disableThumbnailScroll={true}
-        renderFullscreenButton={renderFunction}
-        renderLeftNav={renderFunction}
-        renderRightNav={renderFunction}
-        renderPlayPauseButton={renderFunction}
-      />
-    </div>
+    <Carousel
+      className="rounded-sm shadow-md"
+      autoplay={true}
+      loop={true}
+      nextArrow={dummy}
+      prevArrow={dummy}
+      navigation={dummy}>
+      {images.map((image, index) => (
+        <img
+          src={image}
+          alt={`cover-image-${index}`}
+          key={index}
+          className="h-full w-full object-cover"
+        />
+      ))}
+    </Carousel>
   );
 };
 
