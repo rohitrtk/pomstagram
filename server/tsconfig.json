@@ -8,6 +8,7 @@
     "moduleResolution": "NodeNext",
     "sourceMap": true,
     "allowJs": false,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "removeComments": true,
     "esModuleInterop": true,

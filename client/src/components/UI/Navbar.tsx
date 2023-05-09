@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,11 +6,11 @@ import {
   faSearch,
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
-import { Avatar, IconButton, Input } from "@material-tailwind/react";
+import { IconButton, Input } from "@material-tailwind/react";
 
-import { setLogout } from "@/state";
 import Pomstagram from "@/components/Pomstagram";
-import PawPrint from "./../../assets/pawprint.png";
+import { setLogout } from "@/state";
+
 import UserIcon from "./UserIcon";
 
 const Navbar = () => {
@@ -26,13 +25,6 @@ const Navbar = () => {
         className="flex flex-row justify-center items-center gap-2 hover:cursor-pointer"
         onClick={() => router.push("/")}>
         <Pomstagram />
-        <Image
-          className="w-[20px] h-[20px] rotate-[30deg]"
-          src={PawPrint}
-          width="20"
-          height="20"
-          alt=""
-        />
       </div>
       {user ? (
         <>

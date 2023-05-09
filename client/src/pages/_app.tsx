@@ -1,6 +1,4 @@
 import type { AppProps } from "next/app";
-
-import authReducer from "./../state";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import {
@@ -15,34 +13,25 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
-
 import { ThemeProvider } from "@material-tailwind/react";
 import { config } from "@fortawesome/fontawesome-svg-core";
+
+import authReducer from "@/state";
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
-
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { IState } from "./../state";
 
 import "@/styles/globals.css";
 
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
-  reducer: persistedReducer as any,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [
-          FLUSH,
-          REHYDRATE,
-          PAUSE,
-          PERSIST,
-          PURGE,
-          REGISTER
-        ] as any
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
     });
   }

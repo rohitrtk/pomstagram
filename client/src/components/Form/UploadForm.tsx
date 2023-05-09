@@ -62,7 +62,11 @@ const UploadForm = () => {
       body: formData
     });
 
+    console.log(res);
     const posts = await res.json();
+    console.log(posts);
+    if (res.status !== 200) return;
+
     dispatch(setPosts({ posts }));
 
     reset();
@@ -79,7 +83,7 @@ const UploadForm = () => {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="h-full bg-white">
       <div className="flex flex-col justify-center items-center gap-3">
         <div
           {...getRootProps({ className: "dropzone" })}

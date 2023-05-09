@@ -6,14 +6,11 @@ import {
   Typography
 } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart as faHeartSolid,
-  faHeartCrack
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
-import { IPost, IState, IUser, setPost } from "@/state";
 import UserIcon from "./UserIcon";
+import { IPost, IState, IUser, setPost } from "@/state";
 
 const PostCard = ({
   picturePath,

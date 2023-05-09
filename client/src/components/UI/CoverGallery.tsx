@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import ImageGallery from "react-image-gallery";
 
-const images = [
+const images: { original: string }[] = [
   {
     original: "http://localhost:3001/public/cover1.jpeg"
   },
@@ -13,7 +13,7 @@ const images = [
   }
 ];
 
-const startIndex = Math.floor(Math.random() * images.length);
+const startIndex: number = Math.floor(Math.random() * images.length);
 
 const CoverGallery = () => {
   const renderFunction = (

@@ -3,6 +3,7 @@ import Post from "./../models/Post.js";
 import User from "./../models/User.js";
 
 export const createPost = async (req: Request, res: Response) => {
+  console.log(`Create post\nReq: ${JSON.stringify(req.body)}\nRes: ${res}\n`);
   try {
     const { userId, description, picturePath } = req.body;
     const user = await User.findById(userId);
