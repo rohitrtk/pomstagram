@@ -1,17 +1,18 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { Button, Typography } from "@material-tailwind/react";
 
 import { setLogin } from "@/state";
 import Pomstagram from "@/components/Pomstagram";
 import FormTextInput from "./FormTextInput";
 
 const loginSchema = yup.object().shape({
-  emailAddress: yup.string().required("required"),
-  password: yup.string().required("required")
+  emailAddress: yup.string().required("Required"),
+  password: yup.string().required("Required")
 });
 
 interface FormValues {
@@ -31,10 +32,6 @@ const LoginForm = () => {
     reset,
     formState: { errors }
   } = useForm<FormValues>({ resolver: yupResolver(loginSchema) });
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   const onSubmit = async (data: FormValues) => {
     setLoginFailed(false);
@@ -70,7 +67,7 @@ const LoginForm = () => {
       <div className="m-auto flex flex-col justify-center items-center gap-5 [&>input]:border [&>input]:rounded-md [&>input]:border-gray-300 [&>input]:p-2 border border-gray-300 rounded-sm shadow-lg p-5 h-full">
         <div className="w-full flex flex-col justify-center items-center gap-2">
           <Pomstagram />
-          <p>Log In</p>
+          <Typography>Log In</Typography>
         </div>
         <FormTextInput
           name="emailAddress"
@@ -93,23 +90,23 @@ const LoginForm = () => {
         />
 
         {loginFailed ? (
-          <p className="text-red-500 text-xs">
+          <Typography className="text-red-500 text-xs">
             An error occured. Check your email and password combiation.
-          </p>
+          </Typography>
         ) : (
           <></>
         )}
 
-        <button
-          className="border rounded-md border-gray-300 p-2 hover:bg-gray-200 focus:bg-gray-200 w-1/2"
-          type="submit">
+        <Button className="border rounded-md p-2 w-1/2" type="submit">
           Log In
-        </button>
-        <span
-          className="text-sm hover:underline cursor-pointer text-blue-500"
+        </Button>
+        <Typography
+          size="small"
+          color="blue"
+          className="hover:underline cursor-pointer"
           onClick={() => router.push("/register")}>
           Don&apos;t have an account? Sign up now!
-        </span>
+        </Typography>
       </div>
     </form>
   );

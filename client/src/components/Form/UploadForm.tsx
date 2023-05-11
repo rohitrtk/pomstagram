@@ -48,11 +48,11 @@ const UploadForm = () => {
     const formData = new FormData();
 
     const { picture, description } = getValues();
-    formData.append("picture", picture!);
     formData.append("picturePath", picture!.name);
     formData.append("description", description);
     formData.append("userId", user!._id);
     formData.append("userName", user!.userName);
+    formData.append("picture", picture!);
 
     const res = await fetch("http://localhost:3001/posts", {
       method: "POST",
@@ -62,14 +62,14 @@ const UploadForm = () => {
       body: formData
     });
 
-    console.log(res);
-    const posts = await res.json();
-    console.log(posts);
-    if (res.status !== 200) return;
-
-    dispatch(setPosts({ posts }));
-
-    reset();
+    if (res.status === 205) {
+      console.log("Not a pomeranian!");
+    } else {
+      const posts = await res.json();
+      console.log(posts);
+      dispatch(setPosts({ posts }));
+      reset();
+    }
   };
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =

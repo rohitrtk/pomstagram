@@ -3,7 +3,7 @@ import Post from "./../models/Post.js";
 import User from "./../models/User.js";
 
 export const createPost = async (req: Request, res: Response) => {
-  console.log(`Create post\nReq: ${JSON.stringify(req.body)}\nRes: ${res}\n`);
+  console.log("create post");
   try {
     const { userId, description, picturePath } = req.body;
     const user = await User.findById(userId);
@@ -47,6 +47,17 @@ export const getUserPosts = async (req: Request, res: Response) => {
   }
 }
 
+export const getPostById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
+
 export const likePost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -55,10 +66,10 @@ export const likePost = async (req: Request, res: Response) => {
     const liked = post.likes.get(userId);
 
     if (liked) {
-      console.log("1");
+      console.log("deleting like");
       post.likes.delete(userId as string);
     } else {
-      console.log(req.body);
+      console.log("adding like");
       post.likes.set(userId, true);
     }
 

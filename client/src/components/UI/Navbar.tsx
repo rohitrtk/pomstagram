@@ -9,7 +9,7 @@ import {
 import { IconButton, Input } from "@material-tailwind/react";
 
 import Pomstagram from "@/components/Pomstagram";
-import { setLogout } from "@/state";
+import { setLogout, IState, IUser } from "@/state";
 
 import UserIcon from "./UserIcon";
 
@@ -17,21 +17,21 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector<IState, IUser | null>((state) => state.user);
 
   return (
-    <div className="sticky top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center h-[70px]">
+    <div className="sticky top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center h-[70px] z-30">
       <div
         className="flex flex-row justify-center items-center gap-2 hover:cursor-pointer"
         onClick={() => router.push("/")}>
-        <Pomstagram />
+        <Pomstagram size="h2" />
       </div>
       {user ? (
         <>
           <div>
             <Input
               size="md"
-              placeholder="Search..."
+              label="Search..."
               icon={<FontAwesomeIcon icon={faSearch} />}
             />
           </div>

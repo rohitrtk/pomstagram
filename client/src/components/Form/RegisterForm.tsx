@@ -8,12 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Pomstagram from "@/components/Pomstagram";
 import FormTextInput from "./FormTextInput";
+import { Button, Typography } from "@material-tailwind/react";
 
 const registerSchema = yup.object().shape({
-  userName: yup.string().required("required"),
-  emailAddress: yup.string().required("required"),
-  password: yup.string().required("required"),
-  picture: yup.string().required("required")
+  userName: yup.string().required("Required"),
+  emailAddress: yup.string().required("Required"),
+  password: yup.string().required("Required"),
+  picture: yup.string().required("Required")
 });
 
 interface FormValues {
@@ -74,7 +75,7 @@ const RegisterForm = () => {
       <div className="m-auto flex flex-col justify-center items-center gap-5 border border-gray-300 rounded-sm shadow-lg p-5 h-full">
         <div className="w-full flex flex-col justify-center items-center text-center gap-2">
           <Pomstagram />
-          <p>Sign up to see cute pictures of Pomeranians!</p>
+          <Typography>Sign up to see cute pictures of Pomeranians!</Typography>
         </div>
 
         <FormTextInput
@@ -131,16 +132,16 @@ const RegisterForm = () => {
           />
         </div>
 
-        <button
-          className="border rounded-md border-gray-300 p-2 hover:bg-gray-200 focus:bg-gray-200 w-1/2"
-          type="submit">
+        <Button className="border rounded-md p-2 w-1/2" type="submit">
           Register
-        </button>
-        <span
-          className="text-sm hover:underline cursor-pointer text-blue-500"
+        </Button>
+        <Typography
+          color="blue"
+          size="small"
+          className="hover:underline cursor-pointer"
           onClick={() => router.push("/")}>
           Already have an account? Log in here!
-        </span>
+        </Typography>
       </div>
     </form>
   );

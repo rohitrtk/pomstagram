@@ -17,6 +17,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
 import authReducer from "@/state";
+import theme from "@/theme";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -41,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <ThemeProvider>
+        <ThemeProvider value={theme}>
           <div className="w-screen h-screen">
             <Component {...pageProps} />
           </div>

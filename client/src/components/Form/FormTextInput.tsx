@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Input, Typography } from "@material-tailwind/react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -21,20 +22,20 @@ const FormTextInput = ({
 }: Props) => {
   return (
     <div className="w-2/3 flex flex-col">
-      <input
+      <Input
         className={`w-full border rounded-md ${
           errors[name] ? "border-red-500" : "border-gray-300"
         } p-2`}
         {...register(name, requiredMessage ? { required: "Required" } : {})}
-        placeholder={placeholder}
         type={type}
+        label={placeholder}
       />
       {!noErrorMessage ? (
         <ErrorMessage
           errors={errors}
           name={name}
           render={({ message }) => (
-            <p className="text-red-500 text-xs">{message}</p>
+            <Typography className="text-red-500 text-xs">{message}</Typography>
           )}
         />
       ) : (
