@@ -12,7 +12,7 @@ export const verifyToken = async (req: Request & { user: string | jwt.JwtPayload
     if (token.startsWith("Bearer ")) {
       token = token.slice(7, token.length).trimStart();
     }
-
+    console.log("Token: " + token);
     const verified = jwt.verify(token, process.env.JWT_SECRET as string);
 
     req.user = verified;

@@ -7,7 +7,7 @@ import UserIcon from "@/components/UI/UserIcon";
 import { Typography, Spinner } from "@material-tailwind/react";
 import UserCard from "@/components/UI/UserCard";
 import PostGallery from "@/components/UI/PostGallery";
-import { IPost } from "@/state";
+import { Post } from "@/state";
 
 interface IProfileData {
   _id: string;
@@ -15,7 +15,7 @@ interface IProfileData {
   picturePath: string;
   numLikes: number;
   numPosts: number;
-  posts: IPost[];
+  posts: Post[];
 }
 
 const Profile = () => {
@@ -72,7 +72,7 @@ const Profile = () => {
   return (
     <div className="w-full h-full flex flex-col justify-start items-center">
       <Navbar />
-      <div className="mt-10 flex flex-col w-full h-full justify-center items-center">
+      <div className="mt-10 flex flex-col w-full h-full justify-start items-center">
         {loading ? (
           <Spinner />
         ) : !userData ? (
@@ -81,7 +81,7 @@ const Profile = () => {
             exist.
           </Typography>
         ) : (
-          <>
+          <div className="pt-10 flex flex-col justify-start items-center">
             <UserCard
               userName={userName as string}
               userPicturePath={userData.picturePath}
@@ -91,7 +91,7 @@ const Profile = () => {
             <div className="p-5">
               <PostGallery posts={userData.posts} />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

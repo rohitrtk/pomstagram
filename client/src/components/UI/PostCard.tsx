@@ -12,9 +12,9 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 import UserIcon from "./UserIcon";
-import { IPost, IState, IUser, setPost } from "@/state";
+import { Post, State, User, setPost } from "@/state";
 
-interface Props extends IPost {
+interface Props extends Post {
   link?: boolean;
 }
 
@@ -29,8 +29,8 @@ const PostCard = ({
 }: Props) => {
   const dispatch = useDispatch();
 
-  const token = useSelector<IState, string | null>((state) => state.token);
-  const user = useSelector<IState, IUser | null>((state) => state.user);
+  const token = useSelector<State, string | null>((state) => state.token);
+  const user = useSelector<State, User | null>((state) => state.user);
 
   const [isLiked, setIsLiked] = useState(
     Boolean(user ? likes[user._id] : false)
@@ -50,7 +50,7 @@ const PostCard = ({
       })
     });
 
-    const updatedPost: IPost = await res.json();
+    const updatedPost: Post = await res.json();
     dispatch(setPost({ post: updatedPost }));
     setIsLiked(Boolean(updatedPost.likes[user._id]));
   };

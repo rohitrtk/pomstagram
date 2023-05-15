@@ -5,17 +5,17 @@ import PostCard from "@/components/UI/PostCard";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { IPost, IState, IUser } from "@/state";
+import { Post, State, User } from "@/state";
 import { Spinner } from "@material-tailwind/react";
 
 const Post = () => {
   const router = useRouter();
   const { postId, userName } = router.query;
 
-  const token = useSelector<IState, string | null>((state) => state.token);
-  const user = useSelector<IState, IUser | null>((state) => state.user);
+  const token = useSelector<State, string | null>((state) => state.token);
+  const user = useSelector<State, User | null>((state) => state.user);
 
-  const [postData, setPostData] = useState<IPost | null>(null);
+  const [postData, setPostData] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

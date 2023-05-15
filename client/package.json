@@ -26,6 +26,7 @@
     "dotenv": "^16.0.3",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
+    "js-cookie": "^3.0.5",
     "next": "13.3.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
@@ -39,6 +40,7 @@
     "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@types/node": "^20.1.1",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4"

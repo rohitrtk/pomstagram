@@ -1,15 +1,15 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Textarea, Button } from "@material-tailwind/react";
+import { Textarea, Button, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setPosts, IState, IUser } from "@/state";
+import { setPosts, State, User } from "@/state";
 
 interface FormValues {
   picture: File | null;
@@ -24,8 +24,8 @@ const uploadSchema = yup.object().shape({
 const UploadForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const token = useSelector<IState, string | null>((state) => state.token);
-  const user = useSelector<IState, IUser | null>((state) => state.user);
+  const token = useSelector<State, string | null>((state) => state.token);
+  const user = useSelector<State, User | null>((state) => state.user);
 
   if (!user) {
     router.push("/login");
@@ -37,11 +37,14 @@ const UploadForm = () => {
     reset,
     setValue,
     getValues,
-    formState: { errors }
+    formState: { errors },
+    clearErrors,
+    setError
   } = useForm<FormValues>({ resolver: yupResolver(uploadSchema) });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setValue("picture", acceptedFiles[0]);
+    clearErrors();
   }, []);
 
   const onSubmit = async () => {
@@ -64,10 +67,14 @@ const UploadForm = () => {
 
     if (res.status === 205) {
       console.log("Not a pomeranian!");
+      setError("picture", {
+        message:
+          "Are you sure this photo is of a Pomeranian? Please make sure your Pomeranian is clearly visible!"
+      });
     } else {
       const posts = await res.json();
-      console.log(posts);
       dispatch(setPosts({ posts }));
+      clearErrors();
       reset();
     }
   };
@@ -83,14 +90,22 @@ const UploadForm = () => {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full bg-white">
-      <div className="flex flex-col justify-center items-center gap-3">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="h-full w-full flex flex-col items-center justify-center">
+      <div className="flex flex-col justify-center items-center gap-3 w-full">
         <div
           {...getRootProps({ className: "dropzone" })}
-          className="flex flex-col h-auto w-2/3 p-2 border-gray-300 border rounded-md text-gray-500 text-center justify-center items-center">
-          <input {...getInputProps()} />
+          className={`flex flex-col h-auto w-full p-2 ${
+            errors["picture"]
+              ? "border-2 border-red-500"
+              : "border border-gray-300"
+          } rounded-md text-gray-500 text-center justify-center items-center`}>
+          <input {...getInputProps()} className="w-full" />
           {!getValues().picture ? (
-            <p className="">Drag & drop your profile photo here</p>
+            <Typography className="min-w-[36px] min-h-[96px]">
+              Drag & drop your photo here
+            </Typography>
           ) : (
             <Image
               src={URL.createObjectURL(getValues().picture!)}
@@ -99,9 +114,16 @@ const UploadForm = () => {
               height="480"
             />
           )}
+          <ErrorMessage
+            errors={errors}
+            name="picture"
+            render={({ message }) => (
+              <p className="text-red-500 text-xs">{message}</p>
+            )}
+          />
         </div>
 
-        <div className={`w-full`}>
+        <div className="w-full">
           <Textarea label="Description..." {...register("description")} />
         </div>
 

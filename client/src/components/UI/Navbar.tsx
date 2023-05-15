@@ -9,7 +9,7 @@ import {
 import { IconButton, Input } from "@material-tailwind/react";
 
 import Pomstagram from "@/components/Pomstagram";
-import { setLogout, IState, IUser } from "@/state";
+import { setLogout, State, User } from "@/state";
 
 import UserIcon from "./UserIcon";
 
@@ -17,7 +17,7 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const user = useSelector<IState, IUser | null>((state) => state.user);
+  const user = useSelector<State, User | null>((state) => state.user);
 
   return (
     <div className="sticky top-0 left-0 w-screen px-10 py-3 shadow-md flex flex-row justify-between bg-white items-center h-[70px] z-30">

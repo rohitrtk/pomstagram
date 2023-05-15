@@ -8,8 +8,6 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import { Request, Response, NextFunction } from "express";
-import { readFileSync, unlinkSync } from "fs";
 
 import * as tf from "@tensorflow/tfjs-node";
 import { MobileNet, load as loadModel } from "@tensorflow-models/mobilenet";
