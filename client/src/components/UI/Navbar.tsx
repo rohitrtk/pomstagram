@@ -28,12 +28,15 @@ const Navbar = () => {
       </div>
       {user ? (
         <>
-          <div>
+          <div className="hidden md:flex">
             <Input
               size="md"
               label="Search..."
               icon={<FontAwesomeIcon icon={faSearch} />}
             />
+          </div>
+          <div className="flex md:hidden">
+            <FontAwesomeIcon icon={faSearch} />
           </div>
           <div className="flex flex-row justify-center items-center gap-2">
             <UserIcon

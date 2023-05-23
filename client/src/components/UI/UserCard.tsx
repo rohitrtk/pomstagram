@@ -15,7 +15,7 @@ interface Props {
 
 const UserCard = ({ userName, userPicturePath, numLikes, numPosts }: Props) => {
   return (
-    <Card className="rounded-sm flex flex-wrap w-1/4 p-5">
+    <Card className="rounded-sm flex flex-wrap lg:w-1/4 w-2/3 p-5">
       <CardHeader
         floated={false}
         shadow={false}

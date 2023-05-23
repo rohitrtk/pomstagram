@@ -45,8 +45,8 @@ const Home = ({ _posts }: Props) => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       {!user ? (
-        <div className="w-3/4 grid grid-cols-2 gap-5 min-h-[520px]">
-          <div className="relative collapse md:visible shadow-lg border border-gray-300 rounded-sm">
+        <div className="w-3/4 flex flex-col md:grid md:grid-cols-2 gap-5 md:min-h-[520px]">
+          <div className="relative hidden md:flex shadow-lg border border-gray-300 rounded-sm">
             <CoverGallery />
           </div>
           <LoginForm />

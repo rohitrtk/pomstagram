@@ -71,7 +71,7 @@ const RegisterForm = () => {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="">
       <div className="m-auto flex flex-col justify-center items-center gap-5 border border-gray-300 rounded-sm shadow-lg p-5 h-full">
         <div className="w-full flex flex-col justify-center items-center text-center gap-2">
           <Pomstagram />

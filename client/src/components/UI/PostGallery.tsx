@@ -10,7 +10,7 @@ interface Props {
 const PostGallery = ({ posts }: Props) => {
   console.log(posts);
   return (
-    <div className="grid grid-cols-4 gap-5 h-full overflow-x-hidden overflow-y-scroll p-5">
+    <div className="md:grid md:grid-cols-4 md:gap-5 flex flex-col gap-1 h-full overflow-x-hidden overflow-y-scroll p-5">
       {posts ? (
         <>
           {[...Array(4).keys()].map((i) => (
@@ -33,11 +33,3 @@ const PostGallery = ({ posts }: Props) => {
 };
 
 export default PostGallery;
-
-// posts.map((post, i) => {
-//   return (
-//     <div key={i} className="bg-red-900 overflow-auto">
-//       <PostCard key={i} {...post} />
-//     </div>
-//   );
-// });
